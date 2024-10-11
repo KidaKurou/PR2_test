@@ -64,6 +64,21 @@ class TestRecipe(unittest.TestCase):
     #     with self.assertRaises(ValueError):
     #         Ingredient('Говядина', -400, 300, 450)  # Отрицательный вес должен вызывать ошибку
 
+    def test_ingredient_creation(self):
+        """Тест создания ингредиентов."""
+        ingredients = [
+            ('Говядина', 400, 300, 450),
+            ('Лапша', 200, 180, 150),
+            ('Морковь', 100, 90, 40)
+        ]
+        for name, raw_weight, final_weight, cost in ingredients:
+            with self.subTest(ingredient=name):
+                ingredient = Ingredient(name, raw_weight, final_weight, cost)
+                self.assertEqual(ingredient.name, name)
+                self.assertEqual(ingredient.raw_weight, raw_weight)
+                self.assertEqual(ingredient.final_weight, final_weight)
+                self.assertEqual(ingredient.cost, cost)
+    
     def test_receipt_initialization_lagman(self):
         """Тест инициализации рецепта 'Лагман'."""
         self.assertEqual(self.lagman.name, 'Лагман')
